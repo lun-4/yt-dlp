@@ -139,7 +139,16 @@ def main():
     mods =cythonize(
             [
                 Extension("yt_dlp.*", ["yt_dlp/*.py"]),
-                Extension("yt_dlp.extractor.*", ["yt_dlp/extractor/*.py"]),
+                Extension("yt_dlp.extractor.__init__", ["yt_dlp/extractor/__init__.py"]),
+                Extension("yt_dlp.extractor._extractors", ["yt_dlp/extractor/_extractors.py"]),
+                Extension("yt_dlp.extractor.adobepass", ["yt_dlp/extractor/adobepass.py"]),
+                Extension("yt_dlp.extractor.common", ["yt_dlp/extractor/common.py"]),
+                Extension("yt_dlp.extractor.commonmistakes", ["yt_dlp/extractor/commonmistakes.py"]),
+                Extension("yt_dlp.extractor.commonprotocols", ["yt_dlp/extractor/commonprotocols.py"]),
+                Extension("yt_dlp.extractor.extractors", ["yt_dlp/extractor/extractors.py"]),
+                Extension("yt_dlp.extractor.generic", ["yt_dlp/extractor/generic.py"]),
+                Extension("yt_dlp.extractor.lazy_extractors", ["yt_dlp/extractor/lazy_extractors.py"]),
+                Extension("yt_dlp.extractor.openload", ["yt_dlp/extractor/openload.py"]),
                 Extension("yt_dlp.downloader.*", ["yt_dlp/downloader/*.py"]),
                 Extension("yt_dlp.postprocessor.*", ["yt_dlp/postprocessor/*.py"]),
                 Extension("yt_dlp.compat.*", ["yt_dlp/compat/*.py"]),
