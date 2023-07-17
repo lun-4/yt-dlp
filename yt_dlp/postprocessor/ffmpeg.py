@@ -496,11 +496,13 @@ class FFmpegExtractAudioPP(FFmpegPostProcessor):
 
         if filecodec == 'aac' and target_format in ('m4a', 'best'):
             # Lossless, but in another container
-            extension, _, more_opts, acodec = *ACODECS['m4a'], 'copy'
+            #extension, _, more_opts, acodec = *ACODECS['m4a'], 'copy'
+            extension, _, more_opts, acodec = None, None, None, None
         elif target_format == 'best' or target_format == filecodec:
             # Lossless if possible
             try:
-                extension, _, more_opts, acodec = *ACODECS[filecodec], 'copy'
+                #extension, _, more_opts, acodec = *ACODECS[filecodec], 'copy'
+                extension, _, more_opts, acodec = None, None, None, None
             except KeyError:
                 extension, acodec, more_opts = ACODECS['mp3']
         else:
