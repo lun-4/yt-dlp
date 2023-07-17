@@ -123,3 +123,6 @@ yt-dlp.zip
 # Plugins
 ytdlp_plugins/
 yt-dlp-plugins
+
+*.o
+*.c
