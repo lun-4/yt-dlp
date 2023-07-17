@@ -16,6 +16,9 @@ except ImportError:
     from distutils.core import Command, setup
     setuptools_available = False
 
+from setuptools import Extension
+from Cython.Build import cythonize
+
 from devscripts.utils import read_file, read_version
 
 VERSION = read_version()
@@ -133,6 +136,23 @@ def main():
     else:
         params = build_params()
 
+    mods =cythonize(
+            [
+                Extension("yt_dlp.*", ["yt_dlp/*.py"]),
+                Extension("yt_dlp.extractor.*", ["yt_dlp/extractor/*.py"]),
+                Extension("yt_dlp.downloader.*", ["yt_dlp/downloader/*.py"]),
+                Extension("yt_dlp.postprocessor.*", ["yt_dlp/postprocessor/*.py"]),
+                Extension("yt_dlp.compat.*", ["yt_dlp/compat/*.py"]),
+                Extension("yt_dlp.utils.*", ["yt_dlp/utils/*.py"]),
+                Extension("yt_dlp.dependencies.*", ["yt_dlp/dependencies/*.py"]),
+            ],
+            nthreads=7,
+            build_dir="build",
+            compiler_directives={
+                'language_level': '3str'
+            }
+        ) 
+    print(mods)
     setup(
         name='yt-dlp',
         version=VERSION,
@@ -142,7 +162,9 @@ def main():
         long_description=LONG_DESCRIPTION,
         long_description_content_type='text/markdown',
         url='https://github.com/yt-dlp/yt-dlp',
-        packages=packages(),
+        #packages=packages()wl
+        #packages=['yt_dlp', 'yt_dlp.extractor', 'yt_dlp.downloader', 'yt_dlp.postprocessor', 'yt_dlp.compat'],
+        ext_modules=mods,
         install_requires=REQUIREMENTS,
         python_requires='>=3.7',
         project_urls={
